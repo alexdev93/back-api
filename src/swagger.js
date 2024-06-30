@@ -18,7 +18,7 @@ const doc = {
   },
   host: SERVER_URL, // Replace with your server's hostname and port
   basePath: '/', // Optional: Base path of the API (e.g., /v1)
-  schemes: ['http'], // Specify the protocol used by your API (http, https)
+  schemes: ['http', 'https'], // Specify the protocol used by your API (http, https)
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {

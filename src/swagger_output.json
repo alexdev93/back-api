@@ -12,7 +12,8 @@
   },
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/api/news": {
