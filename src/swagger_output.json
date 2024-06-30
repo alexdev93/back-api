@@ -10,6 +10,7 @@
       "url": "https://alemayehu.glitch.me"
     }
   },
+  "host": "https://back-api-cvlq.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",

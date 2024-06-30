@@ -1,4 +1,5 @@
 const swaggerAutogen = require('swagger-autogen')();
+require('dotenv').config();
 
 const outputFile = './swagger_output.json';
 const endpointsFiles = ['./index.js']; // Path to your Express route files
