@@ -3,9 +3,13 @@
   "info": {
     "title": "Megazin Server API",
     "description": "API documentation for News Service",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "contact": {
+      "name": "Alemayehu Mekonen",
+      "email": "alemayehu.dev@gmail.com",
+      "url": "https://alemayehu.glitch.me"
+    }
   },
-  "host": "localhost:9090",
   "basePath": "/",
   "schemes": [
     "http"
