@@ -16,14 +16,15 @@ const allowedOriginsString = process.env.ALLOWED_ORIGINS;
 const allowedOrigins = allowedOriginsString.split(',');
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Check if the origin is in the allowedOrigins array or if it's not defined (e.g., in case of same-origin requests)
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  // origin: (origin, callback) => {
+  //   // Check if the origin is in the allowedOrigins array or if it's not defined (e.g., in case of same-origin requests)
+  //   if (allowedOrigins.includes(origin) || !origin) {
+  //     callback(null, true);
+  //   } else {
+  //     callback(new Error('Not allowed by CORS'));
+  //   }
+  // },
+  origin: '*',
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
