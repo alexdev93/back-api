@@ -6,6 +6,7 @@ const { sequelize } = require('./config/db');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output.json');
+require('dotenv').config();
 
 const app = express();
 
