@@ -11,26 +11,23 @@ const app = express();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:3001',
-  'https://alexdev93.github.io',
-];
+const allowedOriginsString = process.env.ALLOWED_ORIGINS;
+const allowedOrigins = allowedOriginsString.split(',');
 
 const corsOptions = {
-  // origin: (origin, callback) => {
-  //   if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error('Not allowed by CORS'));
-  //   }
-  // },
-  origin: '*',
-  optionsSuccessStatus: 200,
+  origin: (origin, callback) => {
+    // Check if the origin is in the allowedOrigins array or if it's not defined (e.g., in case of same-origin requests)
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
+
 const port = process.env.PORT || 9090;
 
 app.use(express.json());
