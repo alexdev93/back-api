@@ -4,8 +4,13 @@ const authRoutes = require('./controller/auth.controller');
 const userRoutes = require('./controller/user.controller');
 const { sequelize } = require('./config/db');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 
 const allowedOrigins = [
   'http://localhost:3000',

@@ -12,6 +12,7 @@ const newsRoutes = express.Router();
 const upload = require('../config/upload')
 const authenticateToken = require('../middleware/authMiddleware');
 
+
 newsRoutes.post('/news', upload.single('file'), authenticateToken, async (req, res) => {
   try {
     if (!req.file) {
