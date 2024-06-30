@@ -1,5 +1,8 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+require('dotenv').config();
+
+const { SERVER_URL } = process.env;
 
 const News = sequelize.define('News', {
   title: {
@@ -27,7 +30,7 @@ const News = sequelize.define('News', {
   hooks: {
     beforeValidate: (news, options) => {
       if (news.imagePath) {
-        news.imagePath = `http://localhost:9090/api/photos/${news.imagePath}`;
+        news.imagePath = `${SERVER_URL}/api/photos/${news.imagePath}`;
       }
     },
   },
