@@ -2,7 +2,7 @@ const Houses = require('../models/Houses');
 
 // Create a new user
 const createHouse = async (req, res) => {
-  const houseDetail = req.body;
+  const houseDetail = await req.body;
   try {
     const house = await Houses.create(houseDetail);
     res.status(201).json(house);

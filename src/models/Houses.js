@@ -10,11 +10,11 @@ const Houses = sequelize.define('Houses', {
     allowNull: true,
   },
   price: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   releaseDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   details: {
