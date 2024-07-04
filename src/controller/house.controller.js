@@ -10,8 +10,8 @@ const houseRoutes = express.Router();
 const authenticateToken = require('./../middleware/authMiddleware')
 
 houseRoutes.post('/', authenticateToken, createHouse);
-houseRoutes.get('/',authenticateToken, getAllHouses);
-houseRoutes.get('/:id', authenticateToken, getHouseById);
+houseRoutes.get('/', getAllHouses);
+houseRoutes.get('/:id', getHouseById);
 houseRoutes.put('/:id', authenticateToken, updateHouseById);
 houseRoutes.delete('/:id', authenticateToken, deleteHouseById);
 
