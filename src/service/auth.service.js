@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { generateToken, verifyToken } = require('../utils/jwt');
-const { use } = require('../controller/news.controller');
 
 const register = async (req, res) => {
   const { username, password } = req.body;

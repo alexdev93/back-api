@@ -2,6 +2,7 @@ const express = require('express');
 const newsRoutes = require('./controller/news.controller');
 const authRoutes = require('./controller/auth.controller');
 const userRoutes = require('./controller/user.controller');
+const houseRoutes = require('./controller/house.controller');
 const { sequelize } = require('./config/db');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
@@ -10,7 +11,6 @@ require('dotenv').config();
 
 const app = express();
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 const allowedOriginsString = process.env.ALLOWED_ORIGINS;
 const allowedOrigins = allowedOriginsString.split(',');
@@ -33,10 +33,12 @@ app.use(cors(corsOptions));
 const port = process.env.PORT || 9090;
 
 app.use(express.json());
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/newsImageDIR', express.static('newsImageDIR'));
 app.use('/api', newsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/houses', houseRoutes);
 
 app.use((req, res, next) => {
   res.status(404).send('Not Found');
@@ -46,6 +48,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Server Error');
 });
+
 
 sequelize.sync({ alter: true }).then(() => {
   app.listen(port, () => {

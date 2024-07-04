@@ -11,7 +11,7 @@ const authenticateToken = require('../middleware/authMiddleware');
 const userRoutes = express.Router();
 
 userRoutes.post('/', authenticateToken, createUser);
-userRoutes.get('/', getAllUsers);
+userRoutes.get('/',authenticateToken, getAllUsers);
 userRoutes.get('/:id', authenticateToken, getUserById);
 userRoutes.put('/:id', authenticateToken, updateUserById);
 userRoutes.delete('/:id', authenticateToken, deleteUserById);
