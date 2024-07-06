@@ -17,6 +17,12 @@ houseRoutes.get('/:id', getHouseById);
 houseRoutes.put('/:id', authenticateToken, updateHouseById);
 houseRoutes.delete('/:id', authenticateToken, deleteHouseById);
 houseRoutes.delete('/', authenticateToken, deleteAllHouses);
+houseRoutes.get('/photos/:photoName', (req, res) => {
+  const photoName = req.params.photoName;
+  const filePath = path.join(__dirname, '..', 'houseImageDIR', photoName);
+
+  res.sendFile(filePath);
+});
 
 
 module.exports = houseRoutes;

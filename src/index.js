@@ -11,6 +11,7 @@ require('dotenv').config();
 
 const app = express();
 
+const { SERVER_URL } = process.env;
 
 const allowedOriginsString = process.env.ALLOWED_ORIGINS;
 const allowedOrigins = allowedOriginsString.split(',');
@@ -49,10 +50,9 @@ app.use((err, req, res, next) => {
   res.status(500).send('Server Error');
 });
 
-
 sequelize.sync({ alter: true }).then(() => {
   app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on ${SERVER_URL}:${port}`);
   });
 }).catch(err => {
   console.error('Failed to sync database:', err);

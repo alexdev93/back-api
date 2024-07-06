@@ -28,7 +28,16 @@ const Houses = sequelize.define('Houses', {
   sellerName: {
     type: DataTypes.STRING,
     allowNull: true, // Optional field
+  }
+}, {
+  hooks: {
+    beforeValidate: (house, options) => {
+      if (house.imagePath) {
+        house.imagePath = `${SERVER_URL}/api/photos/${house.imagePath}`;
+      }
+    },
   },
-});
+}
+);
 
 module.exports = Houses;
