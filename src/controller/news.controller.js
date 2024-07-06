@@ -6,14 +6,15 @@ const {
   getNewsById,
   updateNews,
   deleteNews,
-  getLatestNews
+  getLatestNews,
+  deleteAllNews,
 } = require('../service/news.service');
 const newsRoutes = express.Router();
-const upload = require('../config/upload')
+const { newsImageUpload } = require('../config/upload')
 const authenticateToken = require('../middleware/authMiddleware');
 
 
-newsRoutes.post('/news', upload.single('file'), authenticateToken, async (req, res) => {
+newsRoutes.post('/news', newsImageUpload.single('file'), authenticateToken, async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).send('No file uploaded.');
@@ -43,7 +44,7 @@ newsRoutes.get('/news/latest/:limit', async (req, res) => {
 newsRoutes.get('/news', async (req, res) => {
   try {
     const newsList = await getAllNews();
-    
+
     res.status(200).json(newsList);
   } catch (err) {
     console.error('Error:', err.message);
@@ -80,6 +81,10 @@ newsRoutes.delete('/news/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+newsRoutes.delete('/news', async (req, res) => {
+  await deleteAllNews(res);
+})
 
 newsRoutes.get('/photos/:photoName', (req, res) => {
   const photoName = req.params.photoName;

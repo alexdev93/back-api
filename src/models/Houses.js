@@ -25,6 +25,10 @@ const Houses = sequelize.define('Houses', {
     type: DataTypes.STRING,
     allowNull: true, // Optional field
   },
+  sellerName: {
+    type: DataTypes.STRING,
+    allowNull: true, // Optional field
+  },
 });
 
 module.exports = Houses;

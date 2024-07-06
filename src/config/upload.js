@@ -3,18 +3,21 @@ const path = require('path');
 const fs = require('fs');
 
 const NEWS_IMAGE_DIR = `src/newsImageDIR`
+const HOUSE_IMAGE_DIR = `src/houseImageDIR`
 
 const createUploadsFolder = () => {
-  const dir =  NEWS_IMAGE_DIR;
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-    console.log(`Created ${dir} folder`);
+  const newsImage =  NEWS_IMAGE_DIR;
+  const houseImage = HOUSE_IMAGE_DIR;
+  if (!fs.existsSync(newsImage) && !fs.existsSync(houseImage)) {
+    fs.mkdirSync(newsImage);
+    fs.mkdirSync(houseImage)
+    console.log(`Created ${newsImage} and ${houseImage} folder`);
   }
 };
 
 createUploadsFolder();
 
-const storage = multer.diskStorage({
+const newsImageStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, NEWS_IMAGE_DIR);
   },
@@ -23,4 +26,16 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage: storage });
+const houseImageStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, HOUSE_IMAGE_DIR);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const newsImageUpload = multer({ storage: newsImageStorage });
+const houseImageUpload = multer({ storage: houseImageStorage });
+
+module.exports = {newsImageUpload, houseImageUpload}
